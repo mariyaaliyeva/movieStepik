@@ -34,7 +34,7 @@ class ActorCollectionViewCell: UICollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		photoImageView.layer.cornerRadius = 15
+		photoImageView.layer.cornerRadius = 40
 	}
 	
 	//MARK: - Public
@@ -54,8 +54,7 @@ class ActorCollectionViewCell: UICollectionViewCell {
 		photoImageView.snp.makeConstraints { make in
 			make.top.bottom.equalToSuperview().offset(2)
 			make.leading.trailing.equalToSuperview()
-			make.height.equalTo(107)
-			make.width.equalTo(63)
+			make.size.equalTo(80)
 		}
 	}
 }

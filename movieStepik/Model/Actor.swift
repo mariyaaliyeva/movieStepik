@@ -10,4 +10,8 @@ import UIKit
 
 struct Actor {
 	let image: UIImage?
+	let name: String?
+	let birthday: String?
+	let depatment: String?
+	let biography: String?
 }

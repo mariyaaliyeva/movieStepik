@@ -64,6 +64,7 @@ final class MovieTableViewCell: UITableViewCell {
 	// MARK: - Lifecycle
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		isSkeletonable = true
 		setupViews()
 		setupConstraints()
 	}
@@ -107,8 +108,7 @@ final class MovieTableViewCell: UITableViewCell {
 		movieImageView.snp.makeConstraints { make in
 			make.top.equalTo(contentView).offset(12)
 			make.leading.equalTo(contentView).offset(32)
-			make.trailing.equalTo(contentView).offset(-32)
-			make.bottom.equalTo(contentView).offset(-12)
+			make.trailing.bottom.equalTo(contentView).offset(-32)
 			make.height.equalTo(400)
 		}
 		

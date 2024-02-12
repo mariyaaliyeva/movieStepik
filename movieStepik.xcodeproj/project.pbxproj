@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8339FF012B77D3F800BC3680 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339FF002B77D3F800BC3680 /* CollectionTableViewCell.swift */; };
+		8339FF062B77E5DA00BC3680 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339FF052B77E5DA00BC3680 /* Model.swift */; };
+		8339FF082B79310F00BC3680 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339FF072B79310F00BC3680 /* CustomHeader.swift */; };
+		8339FF0B2B7A0BC500BC3680 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8339FF0A2B7A0BC500BC3680 /* DetailMovieViewController.swift */; };
 		8347A9822B5BAE7B004E45B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347A9812B5BAE7B004E45B1 /* AppDelegate.swift */; };
 		8347A9842B5BAE7B004E45B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347A9832B5BAE7B004E45B1 /* SceneDelegate.swift */; };
 		8347A9862B5BAE7B004E45B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347A9852B5BAE7B004E45B1 /* ViewController.swift */; };
@@ -24,9 +28,21 @@
 		8347A9AE2B5C055D004E45B1 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347A9AD2B5C055D004E45B1 /* Actor.swift */; };
 		8347A9B02B5C05A5004E45B1 /* ActorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347A9AF2B5C05A5004E45B1 /* ActorsViewController.swift */; };
 		8347A9B42B5C0965004E45B1 /* ActorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347A9B32B5C0965004E45B1 /* ActorCollectionViewCell.swift */; };
+		83DF943E2B6D45BD00DDFBDA /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 83DF943D2B6D45BD00DDFBDA /* SkeletonView */; };
+		83F053F22B75FE360068B231 /* ZeroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F053F12B75FE360068B231 /* ZeroView.xib */; };
+		83F053F42B75FE660068B231 /* ZeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F053F32B75FE660068B231 /* ZeroView.swift */; };
+		83F053F62B7600BA0068B231 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F053F52B7600BA0068B231 /* UIView+Extension.swift */; };
+		83F053F82B7607B90068B231 /* UIView+hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F053F72B7607B90068B231 /* UIView+hide.swift */; };
+		83F053FA2B7608B40068B231 /* UIView+ PinEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F053F92B7608B40068B231 /* UIView+ PinEdges.swift */; };
+		83F0541E2B76514C0068B231 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F0541D2B76514C0068B231 /* HomeViewController.swift */; };
+		83F0542B2B77366A0068B231 /* CategoryMoviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F0542A2B77366A0068B231 /* CategoryMoviewCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8339FF002B77D3F800BC3680 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
+		8339FF052B77E5DA00BC3680 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8339FF072B79310F00BC3680 /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
+		8339FF0A2B7A0BC500BC3680 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		8347A97E2B5BAE7B004E45B1 /* movieStepik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movieStepik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8347A9812B5BAE7B004E45B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8347A9832B5BAE7B004E45B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +61,13 @@
 		8347A9AD2B5C055D004E45B1 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		8347A9AF2B5C05A5004E45B1 /* ActorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorsViewController.swift; sourceTree = "<group>"; };
 		8347A9B32B5C0965004E45B1 /* ActorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCollectionViewCell.swift; sourceTree = "<group>"; };
+		83F053F12B75FE360068B231 /* ZeroView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZeroView.xib; sourceTree = "<group>"; };
+		83F053F32B75FE660068B231 /* ZeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroView.swift; sourceTree = "<group>"; };
+		83F053F52B7600BA0068B231 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		83F053F72B7607B90068B231 /* UIView+hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+hide.swift"; sourceTree = "<group>"; };
+		83F053F92B7608B40068B231 /* UIView+ PinEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ PinEdges.swift"; sourceTree = "<group>"; };
+		83F0541D2B76514C0068B231 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		83F0542A2B77366A0068B231 /* CategoryMoviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMoviewCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8347A99D2B5BB075004E45B1 /* SnapKit in Frameworks */,
+				83DF943E2B6D45BD00DDFBDA /* SkeletonView in Frameworks */,
 				8347A99F2B5BB075004E45B1 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8339FF092B7A0B7F00BC3680 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8339FF0A2B7A0BC500BC3680 /* DetailMovieViewController.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
 		8347A9752B5BAE7B004E45B1 = {
 			isa = PBXGroup;
 			children = (
@@ -79,9 +111,12 @@
 		8347A9802B5BAE7B004E45B1 /* movieStepik */ = {
 			isa = PBXGroup;
 			children = (
+				83F053F02B75FE1C0068B231 /* Views */,
 				8347A9A12B5BB150004E45B1 /* App */,
 				8347A9AC2B5BB5D3004E45B1 /* Model */,
+				83F0541F2B76699E0068B231 /* Home */,
 				8347A9B22B5C05C8004E45B1 /* Main */,
+				8339FF092B7A0B7F00BC3680 /* MovieDetails */,
 				8347A9B12B5C05B0004E45B1 /* Actors */,
 				8347A98D2B5BAE7D004E45B1 /* Assets.xcassets */,
 				8347A9A02B5BB12F004E45B1 /* Extension */,
@@ -98,6 +133,9 @@
 			children = (
 				8347A9A22B5BB1A4004E45B1 /* UITableViewCell+Reusable.swift */,
 				8347A9A42B5BB1EF004E45B1 /* UITableView+Register.swift */,
+				83F053F52B7600BA0068B231 /* UIView+Extension.swift */,
+				83F053F72B7607B90068B231 /* UIView+hide.swift */,
+				83F053F92B7608B40068B231 /* UIView+ PinEdges.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -140,6 +178,27 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		83F053F02B75FE1C0068B231 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83F053F12B75FE360068B231 /* ZeroView.xib */,
+				83F053F32B75FE660068B231 /* ZeroView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		83F0541F2B76699E0068B231 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				83F0541D2B76514C0068B231 /* HomeViewController.swift */,
+				83F0542A2B77366A0068B231 /* CategoryMoviewCollectionViewCell.swift */,
+				8339FF002B77D3F800BC3680 /* CollectionTableViewCell.swift */,
+				8339FF052B77E5DA00BC3680 /* Model.swift */,
+				8339FF072B79310F00BC3680 /* CustomHeader.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -159,6 +218,7 @@
 			packageProductDependencies = (
 				8347A99C2B5BB075004E45B1 /* SnapKit */,
 				8347A99E2B5BB075004E45B1 /* SnapKit-Dynamic */,
+				83DF943D2B6D45BD00DDFBDA /* SkeletonView */,
 			);
 			productName = movieStepik;
 			productReference = 8347A97E2B5BAE7B004E45B1 /* movieStepik.app */;
@@ -190,6 +250,7 @@
 			mainGroup = 8347A9752B5BAE7B004E45B1;
 			packageReferences = (
 				8347A99B2B5BB074004E45B1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				83DF943C2B6D45BD00DDFBDA /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 8347A97F2B5BAE7B004E45B1 /* Products */;
 			projectDirPath = "";
@@ -207,6 +268,7 @@
 			files = (
 				8347A9912B5BAE7D004E45B1 /* LaunchScreen.storyboard in Resources */,
 				8347A98E2B5BAE7D004E45B1 /* Assets.xcassets in Resources */,
+				83F053F22B75FE360068B231 /* ZeroView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,15 +281,25 @@
 			files = (
 				8347A9B02B5C05A5004E45B1 /* ActorsViewController.swift in Sources */,
 				8347A9A72B5BB4DD004E45B1 /* GenreCollectionViewCell.swift in Sources */,
+				83F053F42B75FE660068B231 /* ZeroView.swift in Sources */,
+				83F053F62B7600BA0068B231 /* UIView+Extension.swift in Sources */,
 				8347A99A2B5BB03B004E45B1 /* MovieTableViewCell.swift in Sources */,
+				83F0541E2B76514C0068B231 /* HomeViewController.swift in Sources */,
 				8347A9A92B5BB56E004E45B1 /* Movie.swift in Sources */,
 				8347A98C2B5BAE7B004E45B1 /* movieStepik.xcdatamodeld in Sources */,
 				8347A9AE2B5C055D004E45B1 /* Actor.swift in Sources */,
+				8339FF012B77D3F800BC3680 /* CollectionTableViewCell.swift in Sources */,
 				8347A9A52B5BB1EF004E45B1 /* UITableView+Register.swift in Sources */,
+				8339FF082B79310F00BC3680 /* CustomHeader.swift in Sources */,
+				8339FF0B2B7A0BC500BC3680 /* DetailMovieViewController.swift in Sources */,
+				83F053FA2B7608B40068B231 /* UIView+ PinEdges.swift in Sources */,
 				8347A9A32B5BB1A4004E45B1 /* UITableViewCell+Reusable.swift in Sources */,
+				83F053F82B7607B90068B231 /* UIView+hide.swift in Sources */,
 				8347A9862B5BAE7B004E45B1 /* ViewController.swift in Sources */,
 				8347A9B42B5C0965004E45B1 /* ActorCollectionViewCell.swift in Sources */,
 				8347A9822B5BAE7B004E45B1 /* AppDelegate.swift in Sources */,
+				83F0542B2B77366A0068B231 /* CategoryMoviewCollectionViewCell.swift in Sources */,
+				8339FF062B77E5DA00BC3680 /* Model.swift in Sources */,
 				8347A9842B5BAE7B004E45B1 /* SceneDelegate.swift in Sources */,
 				8347A9AB2B5BB5B7004E45B1 /* GenreCollectionModel.swift in Sources */,
 			);
@@ -454,6 +526,14 @@
 				minimumVersion = 5.7.0;
 			};
 		};
+		83DF943C2B6D45BD00DDFBDA /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.30.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -466,6 +546,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8347A99B2B5BB074004E45B1 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		83DF943D2B6D45BD00DDFBDA /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83DF943C2B6D45BD00DDFBDA /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
