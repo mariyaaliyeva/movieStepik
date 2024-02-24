@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CategoryMoviewCollectionViewCell: UICollectionViewCell {
 	
@@ -25,7 +26,6 @@ class CategoryMoviewCollectionViewCell: UICollectionViewCell {
 		stack.distribution = .fillProportionally
 		stack.axis = .horizontal
 		stack.alignment = .center
-		stack.backgroundColor = .green
 		stack.clipsToBounds = true
 		return stack
 	}()
@@ -84,11 +84,35 @@ class CategoryMoviewCollectionViewCell: UICollectionViewCell {
 	}
 	
 	//MARK: - Public
-	func configure(with model: CollectionTableCellModel) {
+	func configure(with model: MovieResult, genres: [Genre]) {
 		movieNameLabel.text = model.title
-		movieImageView.image = UIImage(named: model.imageName)
-		ratingLabel.text = model.rating
-		genreLabel.text = model.genreLabel
+		let urlString = "https://image.tmdb.org/t/p/w200" + (
+			model.posterPath)
+		let url = URL(string: urlString)!
+		movieImageView.kf.setImage(with: url)
+		ratingLabel.text = (String(format: "%.1f", floor((model.voteAverage) * 10) / 10))
+		genreLabel.text = getGenres(by: model.genreIDS, genres: genres)
+		
+		if model.voteAverage < 4 {
+			ratingStack.backgroundColor = .systemRed
+		} else if model.voteAverage < 7 {
+			ratingStack.backgroundColor = .systemOrange
+		} else {
+			ratingStack.backgroundColor = .systemGreen
+		}
+	}
+	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		genreLabel.text = nil
+	}
+	
+	func getGenres(by ids: [Int], genres: [Genre]) -> String? {
+		var array: [String] = []
+		for id in ids {
+			array.append(genres.first { $0.id == id }?.name ?? "")
+		}
+		return array.joined(separator: ", ")
 	}
 	
 	// MARK: - Setup Views
@@ -102,7 +126,6 @@ class CategoryMoviewCollectionViewCell: UICollectionViewCell {
 		[starImageView, ratingLabel].forEach {
 			ratingStack.addArrangedSubview($0)
 		}
-		
 	}
 	
 	// MARK: - Setup Constraints

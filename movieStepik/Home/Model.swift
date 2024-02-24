@@ -8,14 +8,7 @@
 import Foundation
 
 enum CellModel {
-		case collectionView(models: [CollectionTableCellModel], rows: Int)
-}
-
-struct CollectionTableCellModel {
-		let title: String
-		let imageName: String
-	  let genreLabel: String
-		let rating: String
+	case collectionView(models: [MovieResult], rows: Int)
 }
 
 enum Themes: String, CaseIterable {

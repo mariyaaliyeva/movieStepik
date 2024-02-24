@@ -2,7 +2,7 @@
 //  ActorsViewController.swift
 //  movieStepik
 //
-//  Created by Rustam Aliyev on 20.01.2024.
+//  Created by Mariya Aliyeva on 20.01.2024.
 //
 
 import UIKit
@@ -10,12 +10,9 @@ import UIKit
 final class ActorsViewController: UIViewController {
 	
 	// MARK: - Props
-	var actorImage: UIImage?
-	var name: String?
-	var birthday: String?
-	var job: String?
-	var bio: String?
-		
+	var actorId = Int()
+	private var networkManager = NetworkManager.shared
+
 	// MARK: - UI
 	
 	private lazy var scrollView: UIScrollView = {
@@ -157,11 +154,17 @@ final class ActorsViewController: UIViewController {
 	}
 	
 	private func loadData() {
-		actorImageView.image = actorImage
-		nameTitleLabel.text = name
-		birthdayTitle.text = birthday
-		jobTitle.text = job
-		descriptionTextView.text = bio
+		
+		networkManager.fetchBioActors(id: actorId) { [weak self] bio in
+			let urlString = "https://image.tmdb.org/t/p/w200" + (
+				bio.profilePath)
+			let url = URL(string: urlString)!
+			self?.actorImageView.kf.setImage(with: url)
+			self?.nameTitleLabel.text = bio.name
+			self?.birthdayTitle.text = bio.birthday
+			self?.jobTitle.text = bio.knownForDepartment
+			self?.descriptionTextView.text = bio.biography
+		}
 	}
 		
 	// MARK: - SetupViews

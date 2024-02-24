@@ -80,13 +80,16 @@ final class MovieTableViewCell: UITableViewCell {
 	}
 	
 	//MARK: - Public
-			func configure(_ model: MovieModel) {
-				movieImageView.image = model.image
-				movieTitleLabel.text = model.name
-				movieDateLabel.text = model.date
-				raitingLabel.text = model.rating
-			}
-				
+	func configure(_ model: MovieResult) {
+		movieTitleLabel.text = model.title
+		let urlString = "https://image.tmdb.org/t/p/w200" + (
+			model.posterPath)
+		let url = URL(string: urlString)!
+		movieImageView.kf.setImage(with: url)
+		raitingLabel.text = (String(format: "%.1f", floor((model.voteAverage) * 10) / 10))
+		movieDateLabel.text = model.releaseDate
+	}
+	
 	// MARK: - Setup Views
 	private func setupViews() {
 		contentView.backgroundColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)

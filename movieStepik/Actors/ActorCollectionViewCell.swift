@@ -38,8 +38,11 @@ class ActorCollectionViewCell: UICollectionViewCell {
 	}
 	
 	//MARK: - Public
-	func configure(model: Actor) {
-		photoImageView.image = model.image
+	func configure(model: Actors) {
+		let urlString = "https://image.tmdb.org/t/p/w200" + (
+			model.profilePath ?? "")
+		let url = URL(string: urlString)!
+		photoImageView.kf.setImage(with: url)
 	}
 	
 	// MARK: - Setup Views

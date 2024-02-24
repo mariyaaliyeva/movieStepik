@@ -2,16 +2,28 @@
 //  Actor.swift
 //  movieStepik
 //
-//  Created by Rustam Aliyev on 20.01.2024.
+//  Created by Mariya Aliyeva on 20.01.2024.
 //
 
 import Foundation
 import UIKit
 
-struct Actor {
-	let image: UIImage?
+struct Actors: Decodable {
+	
+	enum CodingKeys: String, CodingKey{
+		case id
+		case name = "name"
+		case character
+		case profilePath = "profile_path"
+		case castID = "cast_id"
+	}
+	let id: Int
 	let name: String?
-	let birthday: String?
-	let depatment: String?
-	let biography: String?
+	let profilePath: String?
+	let character: String?
+	let castID: Int?
+}
+
+struct CastEntity: Decodable {
+	let cast: [Actors]
 }

@@ -11,8 +11,21 @@ import SnapKit
 final class HomeViewController: UIViewController {
 	
 	// MARK: - Props
-	private var model = [CellModel]()
+	private var networkManager = NetworkManager.shared
+	
 	private var themes = Themes.allCases
+	
+	private lazy var genres: [Genre] = []
+	
+	private var todayAtTheCinema: [MovieResult] = []
+	private var soonAtTheCinema: [MovieResult] = []
+	private var trendingMovies: [MovieResult] = []
+	
+	private var model: [CellModel] =  [] {
+		didSet {
+			allmMovieTableView.reloadData()
+		}
+	}
 	
 	// MARK: - UI
 	private lazy var allmMovieTableView: UITableView = {
@@ -31,6 +44,7 @@ final class HomeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpModels()
+		loadGenres()
 		setupNavigationBar()
 		setupViews()
 		setupConstraints()
@@ -61,40 +75,49 @@ final class HomeViewController: UIViewController {
 	
 	// MARK: - Private
 	private func setUpModels() {
-		model.append(.collectionView(models: [
-			CollectionTableCellModel(title: "Avatar", imageName: "avatar", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "Car 2", imageName: "batman", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "avatar", imageName: "avatar", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5")
-		],
-																 rows: 1))
 		
-		model.append(.collectionView(models: [
-			CollectionTableCellModel(title: "Avatar", imageName: "avatar", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "Car 2", imageName: "batman", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "avatar", imageName: "avatar", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5")
-		],
-																 rows: 1))
-		model.append(.collectionView(models: [
-			CollectionTableCellModel(title: "Avatar", imageName: "avatar", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "Car 2", imageName: "batman", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "avatar", imageName: "avatar", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5"),
-			CollectionTableCellModel(title: "sonic", imageName: "sonic", genreLabel: "Семейный, фантастика, приключения", rating: "5.5")
-		],
-																 rows: 1))
+		let queue = DispatchQueue(label: "Queue")
+		let semaphore = DispatchSemaphore(value: 1)
+		
+		queue.async {
+			semaphore.wait()
+			self.networkManager.loadTodayMovies { [weak self] movies in
+				self?.todayAtTheCinema = movies
+				self?.model.append(.collectionView(models: movies, rows: 1))
+			}
+			semaphore.signal()
+		}
+		
+		queue.async {
+			semaphore.wait()
+			self.networkManager.loadSoonMovies { [weak self] movies in
+				self?.soonAtTheCinema = movies
+				self?.model.append(.collectionView(models: movies, rows: 1))
+			}
+			semaphore.signal()
+		}
+		
+		queue.async {
+			semaphore.wait()
+			self.networkManager.loadTrendingMovies { [weak self] movies in
+				self?.trendingMovies = movies
+				self?.model.append(.collectionView(models: movies, rows: 1))
+			}
+			semaphore.signal()
+		}
+	}
+	
+	// MARK: - Private
+	private func loadGenres() {
+		networkManager.fetchGenres { [weak self] genres in
+			genres.forEach { genre in
+				self?.genres.append(genre)
+			}
+		}
 	}
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -102,12 +125,26 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 																														"CustomHeader") as! CustomHeader
 		
 		header.didTapFavorite = { [weak self] in
-			let allMovies = ViewController()
-			self?.navigationController?.pushViewController(allMovies, animated: true)
+			if section == 0 {
+				let allMovies = ViewController()
+				allMovies.movies = self?.todayAtTheCinema ?? []
+				self?.navigationController?.pushViewController(allMovies, animated: true)
+			}
+			if section == 1 {
+				let allMovies = ViewController()
+				allMovies.movies = self?.soonAtTheCinema ?? []
+				self?.navigationController?.pushViewController(allMovies, animated: true)
+			}
+			if section == 2 {
+				let allMovies = ViewController()
+				allMovies.movies = self?.trendingMovies ?? []
+				self?.navigationController?.pushViewController(allMovies, animated: true)
+			}
 		}
 		if section == 0 {
 			header.configure(categoryName: themes[section].rawValue)
-
+			
+			
 		} else if section == 1 {
 			header.configure(categoryName: themes[section].rawValue)
 		} else {
@@ -117,6 +154,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
+		print(model.count)
 		return model.count
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -144,3 +182,4 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 		return 50
 	}
 }
+

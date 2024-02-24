@@ -10,6 +10,10 @@ import UIKit
 final class DetailMovieViewController: UIViewController {
 	
 	// MARK: - Props
+	
+	private var networkManager = NetworkManager.shared
+	
+	var movieID = Int()
 	var actorImage: UIImage?
 	var movieImage: UIImage?
 	var movieTitle: String?
@@ -17,13 +21,11 @@ final class DetailMovieViewController: UIViewController {
 	var overview: String?
 	var raiting: String?
 	
-	var actors: [Actor] = [
-		Actor(image: UIImage(named: "actor1"), name: "Jennifer Lopez", birthday: "July 24, 1969, Bronx, New York, U.S.", depatment: "Singer, actress", biography: "Jennifer Lopez (born July 24, 1969, Bronx, New York, U.S.) American actress and musician who began appearing in films in the late 1980s and quickly became one of the highest-paid Latina actresses in the history of Hollywood. She later found crossover success in the music industry with a series of pop albums. Lopez, who was born into a family of Puerto Rican descent, took dance lessons throughout her childhood and from an early age had aspirations of fame. She performed internationally in stage musicals, and at age 16 she made her film debut with a small role in My Little Girl (1986). Her television break came in 1990 when she was cast as one of the “Fly Girls,” dancers who appeared on the comedy show In Living Color. After she left the show, she turned her focus to acting, first in several short-lived television series and then in movie roles."),
-		Actor(image: UIImage(named: "ben"), name: "Ben Affleck", birthday: "August 15, 1972, Berkeley, California, U.S.", depatment: "Actor, filmmaker", biography: "Ben Affleck (born August 15, 1972, Berkeley, California, U.S.) American actor and filmmaker who played leading roles in action, drama, and comedy films but who was perhaps more renowned for his work as a screenwriter, director, and producer. Affleck grew up in Cambridge, Massachusetts, where he formed a lasting friendship with his neighbour Matt Damon. Affleck’s first role was in a Burger King commercial, and in 1984 he appeared in the Public Broadcasting Service’s miniseries The Voyage of the Mimi. He continued acting as a teenager in the TV movie Hands of a Stranger (1987) and in The Second Voyage of the Mimi (1988). Affleck briefly attended both the University of Vermont and Occidental College but left before graduating, to focus on acting. During his early career his height and stature often got him cast as a bully, and he played minor characters in independent films such as the cult hits Dazed and Confused (1993) and Kevin Smith’s Mallrats (1995). Smith was impressed by Affleck and cast him as the lead in his next film, Chasing Amy (1997). Ben Affleck (born August 15, 1972, Berkeley, California, U.S.) American actor and filmmaker who played leading roles in action, drama, and comedy films but who was perhaps more renowned for his work as a screenwriter, director, and producer. Affleck grew up in Cambridge, Massachusetts, where he formed a lasting friendship with his neighbour Matt Damon. Affleck’s first role was in a Burger King commercial, and in 1984 he appeared in the Public Broadcasting Service’s miniseries The Voyage of the Mimi. He continued acting as a teenager in the TV movie Hands of a Stranger (1987) and in The Second Voyage of the Mimi (1988). Affleck briefly attended both the University of Vermont and Occidental College but left before graduating, to focus on acting. During his early career his height and stature often got him cast as a bully, and he played minor characters in independent films such as the cult hits Dazed and Confused (1993) and Kevin Smith’s Mallrats (1995). Smith was impressed by Affleck and cast him as the lead in his next film, Chasing Amy (1997)."),
-		Actor(image: UIImage(named: "angelina"), name: "Angelina Jolie", birthday: "June 4, 1975, Los Angeles, California, U.S.", depatment: "Actress, director", biography: "Angelina Jolie (born June 4, 1975, Los Angeles, California, U.S.) American actress and director known for her sex appeal and edginess as well as for her humanitarian work. She won an Academy Award for her supporting role as a mental patient in Girl, Interrupted (1999). Jolie, daughter of actor Jon Voight, spent much of her childhood in New York before relocating to Los Angeles at age 11. She attended the Lee Strasberg Theatre and Film Institute for two years and then enrolled at Beverly Hills High School. She later studied drama at New York University. In addition to acting in theatre productions, she modeled and appeared in music videos.")
-		
-	]
-
+	private lazy var actors: [Actors] = [] {
+		didSet {
+			self.photoCollectionView.reloadData()
+		}
+	}
 	// MARK: - UI
 	private lazy var scrollView: UIScrollView = {
 		let scroll = UIScrollView()
@@ -66,7 +68,7 @@ final class DetailMovieViewController: UIViewController {
 	
 	private lazy var raitingLabel: UILabel = {
 		let label = UILabel()
-		label.font = .boldSystemFont(ofSize: 16)
+		label.font = .boldSystemFont(ofSize: 12)
 		label.textAlignment = .center
 		label.textColor = .white
 		return label
@@ -160,13 +162,26 @@ final class DetailMovieViewController: UIViewController {
 	@objc func barButtonTapped() {
 		self.navigationController?.popViewController(animated: true)
 	}
-	
+
 	private func loadData() {
-		movieImageView.image = movieImage
-		movieTitleLabel.text = movieTitle
-		dateLabel.text = dateTitle
-		descriptionTextView.text = overview
-		raitingLabel.text = raiting
+		
+		networkManager.fetchMovieDetails(id: movieID) { [weak self] movieDetails in
+			guard let posterPath = movieDetails.posterPath else { return }
+			
+			let urlString = "https://image.tmdb.org/t/p/w200" + (posterPath)
+			let url = URL(string: urlString)!
+			
+			self?.movieImageView.kf.setImage(with: url)
+			self?.movieTitleLabel.text = movieDetails.originalTitle
+			self?.dateLabel.text = movieDetails.releaseDate
+			self?.descriptionTextView.text = movieDetails.overview
+			self?.raitingLabel.text = (String(format: "%.1f", floor((movieDetails.voteAverage ?? 0) * 10) / 10))
+		}
+		
+		networkManager.fetchCast(id: movieID) { [weak self] images in
+			self?.actors = images
+		}
+		
 	}
 	
 	// MARK: - Setup Views
@@ -205,7 +220,9 @@ final class DetailMovieViewController: UIViewController {
 		}
 		
 		movieImageView.snp.makeConstraints { make in
-			make.height.equalTo(400)
+			make.leading.equalToSuperview().offset(30)
+			make.trailing.equalToSuperview().offset(-30)
+			make.height.equalTo(424)
 		}
 		
 		raitingView.snp.makeConstraints { make in
@@ -290,11 +307,7 @@ extension DetailMovieViewController: UICollectionViewDelegate {
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let actorVC = ActorsViewController()
-		actorVC.actorImage = actors[indexPath.row].image
-		actorVC.name = actors[indexPath.row].name
-		actorVC.birthday = actors[indexPath.row].birthday
-		actorVC.job = actors[indexPath.row].depatment
-		actorVC.bio = actors[indexPath.row].biography
+		actorVC.actorId = actors[indexPath.row].id 
 		self.navigationController?.pushViewController(actorVC, animated: true)
 	}
 }

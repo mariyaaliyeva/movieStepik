@@ -2,7 +2,7 @@
 //  GenreCollectionViewCell.swift
 //  movieStepik
 //
-//  Created by Rustam Aliyev on 20.01.2024.
+//  Created by Mariya Aliyeva on 20.01.2024.
 //
 
 import UIKit
@@ -40,8 +40,8 @@ final class GenreCollectionViewCell: UICollectionViewCell {
 	}
 	
 	//MARK: - Public
-	func configure(model: GenreCollectionModel) {
-		genreCollectionLabel.text = model.nameOfGenre
+	func configure(model: Genre) {
+		genreCollectionLabel.text = model.name
 	}
 	
 	// MARK: - Setup Views

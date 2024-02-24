@@ -12,7 +12,9 @@ final class CollectionTableViewCell: UITableViewCell {
 	static var reuseId = String(describing: CollectionTableViewCell.self)
 	
 	// MARK: - Props
-	private var models = [CollectionTableCellModel]()
+	private var networkManager = NetworkManager.shared
+	private var models = [MovieResult]()
+	private lazy var genres: [Genre] = []
 	
 	// MARK: - UI
 	lazy var movieCollectionView: UICollectionView = {
@@ -31,6 +33,7 @@ final class CollectionTableViewCell: UITableViewCell {
 	// MARK: - Lifecycle
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		loadGenres()
 		setupViews()
 		setupConstraints()
 	}
@@ -40,9 +43,18 @@ final class CollectionTableViewCell: UITableViewCell {
 	}
 	
 	//MARK: - Public
-	public func configure(with models: [CollectionTableCellModel]) {
+	public func configure(with models: [MovieResult]) {
 		self.models = models
 		movieCollectionView.reloadData()
+	}
+	
+	// MARK: - Private
+	private func loadGenres() {
+		networkManager.fetchGenres { [weak self] genres in
+			genres.forEach { genre in
+				self?.genres.append(genre)
+			}
+		}
 	}
 	
 	// MARK: - Setup Views
@@ -73,7 +85,7 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let model = models[indexPath.row]
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryMoviewCollectionViewCell.reuseId, for: indexPath) as! CategoryMoviewCollectionViewCell
-		cell.configure(with: model)
+		cell.configure(with: model, genres: genres)
 		return cell
 	}
 	

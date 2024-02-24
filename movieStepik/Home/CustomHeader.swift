@@ -27,7 +27,7 @@ class CustomHeader: UITableViewHeaderFooterView {
 		button.addTarget(self, action: #selector(allButtonAction), for: .touchUpInside)
 		return button
 	}()
-
+	
 	override init(reuseIdentifier: String?) {
 		super.init(reuseIdentifier: reuseIdentifier)
 		setupViews()
@@ -37,7 +37,7 @@ class CustomHeader: UITableViewHeaderFooterView {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-
+	
 	func configure(categoryName: String) {
 		titleLabel.text = categoryName
 	}
