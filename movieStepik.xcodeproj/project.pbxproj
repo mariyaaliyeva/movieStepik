@@ -34,6 +34,8 @@
 		8351D8982B84FC1D00035811 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8351D8972B84FC1D00035811 /* Kingfisher */; };
 		8351D89A2B85BB4E00035811 /* MovieDetailsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8351D8992B85BB4E00035811 /* MovieDetailsEntity.swift */; };
 		8351D8B32B8A36EC00035811 /* ActorsBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8351D8B22B8A36EC00035811 /* ActorsBio.swift */; };
+		8351D8B62B8A3BC000035811 /* Homework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8351D8B52B8A3BC000035811 /* Homework.swift */; };
+		8351D8B82B8A3D4600035811 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8351D8B72B8A3D4600035811 /* NetworkLayer.swift */; };
 		83DF943E2B6D45BD00DDFBDA /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 83DF943D2B6D45BD00DDFBDA /* SkeletonView */; };
 		83F053F22B75FE360068B231 /* ZeroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F053F12B75FE360068B231 /* ZeroView.xib */; };
 		83F053F42B75FE660068B231 /* ZeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F053F32B75FE660068B231 /* ZeroView.swift */; };
@@ -70,6 +72,8 @@
 		8351D88F2B84F22F00035811 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8351D8992B85BB4E00035811 /* MovieDetailsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsEntity.swift; sourceTree = "<group>"; };
 		8351D8B22B8A36EC00035811 /* ActorsBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorsBio.swift; sourceTree = "<group>"; };
+		8351D8B52B8A3BC000035811 /* Homework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework.swift; sourceTree = "<group>"; };
+		8351D8B72B8A3D4600035811 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		83F053F12B75FE360068B231 /* ZeroView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZeroView.xib; sourceTree = "<group>"; };
 		83F053F32B75FE660068B231 /* ZeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroView.swift; sourceTree = "<group>"; };
 		83F053F52B7600BA0068B231 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		8347A9802B5BAE7B004E45B1 /* movieStepik */ = {
 			isa = PBXGroup;
 			children = (
+				8351D8B42B8A3B8300035811 /* HOMEWORK */,
 				8347A9A12B5BB150004E45B1 /* App */,
 				83F053F02B75FE1C0068B231 /* Views */,
 				8351D88E2B84F20D00035811 /* NetworkService */,
@@ -199,6 +204,15 @@
 				8351D88F2B84F22F00035811 /* NetworkManager.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		8351D8B42B8A3B8300035811 /* HOMEWORK */ = {
+			isa = PBXGroup;
+			children = (
+				8351D8B52B8A3BC000035811 /* Homework.swift */,
+				8351D8B72B8A3D4600035811 /* NetworkLayer.swift */,
+			);
+			path = HOMEWORK;
 			sourceTree = "<group>";
 		};
 		83F053F02B75FE1C0068B231 /* Views */ = {
@@ -307,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8351D8B82B8A3D4600035811 /* NetworkLayer.swift in Sources */,
 				8347A9B02B5C05A5004E45B1 /* ActorsViewController.swift in Sources */,
 				8347A9A72B5BB4DD004E45B1 /* GenreCollectionViewCell.swift in Sources */,
 				83F053F42B75FE660068B231 /* ZeroView.swift in Sources */,
@@ -318,6 +333,7 @@
 				8347A98C2B5BAE7B004E45B1 /* movieStepik.xcdatamodeld in Sources */,
 				8347A9AE2B5C055D004E45B1 /* Actor.swift in Sources */,
 				8339FF012B77D3F800BC3680 /* CollectionTableViewCell.swift in Sources */,
+				8351D8B62B8A3BC000035811 /* Homework.swift in Sources */,
 				8351D8902B84F22F00035811 /* NetworkManager.swift in Sources */,
 				8347A9A52B5BB1EF004E45B1 /* UITableView+Register.swift in Sources */,
 				8339FF082B79310F00BC3680 /* CustomHeader.swift in Sources */,
