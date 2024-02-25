@@ -12,6 +12,7 @@ final class ActorsViewController: UIViewController {
 	// MARK: - Props
 	var actorId = Int()
 	private var networkManager = NetworkManager.shared
+	private var alamofireNetworkManager = AlamofireNetworkManager.shared
 
 	// MARK: - UI
 	
@@ -155,10 +156,8 @@ final class ActorsViewController: UIViewController {
 	
 	private func loadData() {
 		
-		networkManager.fetchBioActors(id: actorId) { [weak self] bio in
-			let urlString = "https://image.tmdb.org/t/p/w200" + (
-				bio.profilePath)
-			let url = URL(string: urlString)!
+		alamofireNetworkManager.fetchBioActors(id: actorId) { [weak self] bio in
+			let url = URL(string: bio.posterURL ?? "")!
 			self?.actorImageView.kf.setImage(with: url)
 			self?.nameTitleLabel.text = bio.name
 			self?.birthdayTitle.text = bio.birthday

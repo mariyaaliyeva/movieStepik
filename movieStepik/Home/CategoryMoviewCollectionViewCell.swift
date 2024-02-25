@@ -86,9 +86,7 @@ class CategoryMoviewCollectionViewCell: UICollectionViewCell {
 	//MARK: - Public
 	func configure(with model: MovieResult, genres: [Genre]) {
 		movieNameLabel.text = model.title
-		let urlString = "https://image.tmdb.org/t/p/w200" + (
-			model.posterPath)
-		let url = URL(string: urlString)!
+		let url = URL(string: model.posterURL ?? "")!
 		movieImageView.kf.setImage(with: url)
 		ratingLabel.text = (String(format: "%.1f", floor((model.voteAverage) * 10) / 10))
 		genreLabel.text = getGenres(by: model.genreIDS, genres: genres)

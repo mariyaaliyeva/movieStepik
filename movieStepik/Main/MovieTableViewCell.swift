@@ -81,10 +81,7 @@ final class MovieTableViewCell: UITableViewCell {
 	
 	//MARK: - Public
 	func configure(_ model: MovieResult) {
-		movieTitleLabel.text = model.title
-		let urlString = "https://image.tmdb.org/t/p/w200" + (
-			model.posterPath)
-		let url = URL(string: urlString)!
+		let url = URL(string: model.posterURL ?? "")!
 		movieImageView.kf.setImage(with: url)
 		raitingLabel.text = (String(format: "%.1f", floor((model.voteAverage) * 10) / 10))
 		movieDateLabel.text = model.releaseDate

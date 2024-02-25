@@ -12,14 +12,10 @@ final class DetailMovieViewController: UIViewController {
 	// MARK: - Props
 	
 	private var networkManager = NetworkManager.shared
+	private var alamofireNetworkManager = AlamofireNetworkManager.shared
 	
 	var movieID = Int()
-	var actorImage: UIImage?
-	var movieImage: UIImage?
-	var movieTitle: String?
-	var dateTitle: String?
-	var overview: String?
-	var raiting: String?
+  var movieTitle = String()
 	
 	private lazy var actors: [Actors] = [] {
 		didSet {
@@ -165,12 +161,8 @@ final class DetailMovieViewController: UIViewController {
 
 	private func loadData() {
 		
-		networkManager.fetchMovieDetails(id: movieID) { [weak self] movieDetails in
-			guard let posterPath = movieDetails.posterPath else { return }
-			
-			let urlString = "https://image.tmdb.org/t/p/w200" + (posterPath)
-			let url = URL(string: urlString)!
-			
+		alamofireNetworkManager.fetchMovieDetails(id: movieID) { [weak self] movieDetails in
+			let url = URL(string: movieDetails.posterURL ?? "")!
 			self?.movieImageView.kf.setImage(with: url)
 			self?.movieTitleLabel.text = movieDetails.originalTitle
 			self?.dateLabel.text = movieDetails.releaseDate
@@ -178,7 +170,7 @@ final class DetailMovieViewController: UIViewController {
 			self?.raitingLabel.text = (String(format: "%.1f", floor((movieDetails.voteAverage ?? 0) * 10) / 10))
 		}
 		
-		networkManager.fetchCast(id: movieID) { [weak self] images in
+		alamofireNetworkManager.fetchCast(id: movieID) { [weak self] images in
 			self?.actors = images
 		}
 		

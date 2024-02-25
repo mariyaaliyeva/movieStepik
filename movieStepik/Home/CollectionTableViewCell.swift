@@ -10,6 +10,7 @@ import UIKit
 final class CollectionTableViewCell: UITableViewCell {
 	
 	static var reuseId = String(describing: CollectionTableViewCell.self)
+	private var alamofireNetworkManager = AlamofireNetworkManager.shared
 	
 	// MARK: - Props
 	private var networkManager = NetworkManager.shared
@@ -50,7 +51,7 @@ final class CollectionTableViewCell: UITableViewCell {
 	
 	// MARK: - Private
 	private func loadGenres() {
-		networkManager.fetchGenres { [weak self] genres in
+		alamofireNetworkManager.fetchGenres { [weak self] genres in
 			genres.forEach { genre in
 				self?.genres.append(genre)
 			}

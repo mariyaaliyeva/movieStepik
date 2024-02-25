@@ -12,6 +12,7 @@ final class HomeViewController: UIViewController {
 	
 	// MARK: - Props
 	private var networkManager = NetworkManager.shared
+	private var alamofireNetworkManager = AlamofireNetworkManager.shared
 	
 	private var themes = Themes.allCases
 	
@@ -109,7 +110,7 @@ final class HomeViewController: UIViewController {
 	
 	// MARK: - Private
 	private func loadGenres() {
-		networkManager.fetchGenres { [weak self] genres in
+		alamofireNetworkManager.fetchGenres { [weak self] genres in
 			genres.forEach { genre in
 				self?.genres.append(genre)
 			}

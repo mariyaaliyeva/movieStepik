@@ -39,10 +39,13 @@ class ActorCollectionViewCell: UICollectionViewCell {
 	
 	//MARK: - Public
 	func configure(model: Actors) {
-		let urlString = "https://image.tmdb.org/t/p/w200" + (
-			model.profilePath ?? "")
-		let url = URL(string: urlString)!
+		let url = URL(string: model.posterURL ?? "")!
 		photoImageView.kf.setImage(with: url)
+	}
+	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		photoImageView.image = nil
 	}
 	
 	// MARK: - Setup Views

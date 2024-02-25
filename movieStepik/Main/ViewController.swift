@@ -12,6 +12,7 @@ final class ViewController: UIViewController {
 
 	// MARK: - Private properties
 	private var networkManager = NetworkManager.shared
+	private var alamofireNetworkManager = AlamofireNetworkManager.shared
 	
 	private lazy var genres: [Genre] = [.init(id: 1, name: "All")] {
 		didSet {
@@ -83,7 +84,7 @@ final class ViewController: UIViewController {
 	
 	// MARK: - Private
 	private func loadGenres() {
-		networkManager.fetchGenres { [weak self] genres in
+		alamofireNetworkManager.fetchGenres { [weak self] genres in
 			genres.forEach { genre in
 				self?.genres.append(genre)
 			}
@@ -133,6 +134,7 @@ extension ViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let movieDetais = DetailMovieViewController()
 		movieDetais.movieID = movies[indexPath.row].id
+		movieDetais.movieTitle = movies[indexPath.row].title
 		navigationController?.pushViewController(movieDetais, animated: true)
 	}
 }
